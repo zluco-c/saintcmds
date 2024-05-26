@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lain Bot Commands</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&family=Work+Sans:wght@100;400&display=swap");
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+            }
+        }
+
+        body {
+            animation: appear 3s;
+            display: flex;
+            font-family: 'Work Sans', sans-serif;
+            color: #fff;
+            margin: 0; 
+            padding: 0; 
+            background-color: #1a1a1a; 
+        }
+
+        .sidebar {
+            width: 90px;
+            background-color: #1e1e1e;
+            padding: 20px;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin: 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .tab-container {
+            margin-top: 20px;
+        }
+
+        .commands-container {
+            flex: 1;
+            background: #040404;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .tab {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #1e1e1e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 1em;
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .tab.active {
+            background-color: #0c0c0c;
+        }
+
+        .command-box {
+            background-color: #0c0c0c;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .command-box.show {
+            opacity: 1;
+        }
+
+        .command-box h3 {
+            color: #ffffff;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .command-box p {
+            color: #ffffff;
+            font-size: 0.8em;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .sidebar {
+                display: block;
+            }
+            .commands-container {
+                width: calc(100% - 70px);
+                max-width: calc(100% - 70px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="search-bar">
+        <input type="text" id="searchInput" onkeyup="searchCommands()" placeholder="Search commands">
+    </div>
+    <div class="tab-container">
+        <button class="tab active" onclick="showModule('all')">All</button>
+        <button class="tab" onclick="showModule('fun')">Fun</button>
+        <button class="tab" onclick="showModule('information')">Information</button>
+        <button class="tab" onclick="showModule('lastfm')">LastFM</button>
+        <button class="tab" onclick="showModule('miscellaneous')">Miscellaneous</button>
+        <button class="tab" onclick="showModule('moderation')">Moderation</button>
+        <button class="tab" onclick="showModule('servers')">Servers</button>
+        <button class="tab" onclick="showModule('socials')">Socials</button>
+        <button class="tab" onclick="showModule('utility')">Utility</button>
+    </div>
+</div>
+<div class="commands-container">
+    <div class="category active" id="all">
+        <div class="command-box" data-module="fun">
+            <h3></h3>
+            <p>Cuddle with a member</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: cuddle &lt;member&gt;</p>
+        </div>
+        <div class="command-box" data-module="fun">
+            <h3>divorce</h3>
+            <p>Divorce your partner</p>
+            <p>Aliases: dvc</p>
+            <hr>
+            <p>Usage: divorce</p>
+        </div>
+        <div class="command-box" data-module="fun">
+            <h3>choose</h3>
+            <p>let the bot choose</p>
+            <p>Aliases: None</p>
+            <hr>
+            <p>Usage:  choose [yap]</p>
+        </div>
+        <div class="command-box" data-module="fun">
+            <h3>wouldyourather</h3>
+            <p>play a wouldyourather game!</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: wouldyourather;</p>
+        </div>
+        <div class="command-box" data-module="fun">
+            <h3>userinfo</h3>
+            <p>See a users info</p>
+            <p>Aliases: ui</p>
+            <hr>
+            <p>Usage:  userinfo &lt;member&gt;</p>
+        </div>
+        <div class="command-box" data-module="fun">
+            <h3>image</h3>
+            <p>search for a picture</p>
+            <p>Aliases: img</p>
+            <hr>
+            <p>Usage: img &lt;[query]&gt;</p>
+        </div>
+        <div class="command-box" data-module="fun">
+            <h3>editsnipe</h3>
+            <p>gets the recently edited text</p>
+            <p>Aliases: es</p>
+            <hr>
+            <p>Usage: editsnipe</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>reactionsnipe</h3>
+            <p>shows recently removed reactions</p>
+            <p>Aliases: rs</p>
+            <hr>
+            <p>Usage: reactionsnipe</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>avatar</h3>
+            <p>View a user's avatar</p>
+            <p>Aliases: av</p>
+            <hr>
+            <p>Usage: avatar &lt;user&gt;</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>banner</h3>
+            <p>View a user's banner</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: banner &lt;user&gt;</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>urbandictionary</h3>
+            <p>Search for a word in the dictionary</p>
+            <p>Aliases: urban</p>
+            <hr>
+            <p>Usage:  urbandictionary [word]</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>help</h3>
+            <p>Displays a list of available commands or provides information            about a specific command.</p>
+            <p>Aliases: commands, h, cmds</p>
+            <hr>
+            <p>Usage: help [command]</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>afk</h3>
+            <p>go afk.</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: afk</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>membercount</h3>
+            <p>View the server's member count</p>
+            <p>Aliases: mc</p>
+            <hr>
+            <p>Usage: membercount</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>botclear</h3>
+            <p>delete the bots messages.</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: botclear</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>roleinfo</h3>
+            <p>Shows info of roles in the server</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: roleinfo [role]</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>snipe</h3>
+            <p>shows the deleted messages.</p>
+            <p>Aliases: s</p>
+            <hr>
+            <p>Usage: serverbanner &lt;invite&gt;</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>serveravatar</h3>
+            <p>Show the server icon.</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: servericon &lt;invite&gt;</p>
+        </div>
+        <div class="command-box" data-module="information">
+            <h3>serverinfo</h3>
+            <p>Return server information</p>
+            <p>Aliases: si</p>
+            <hr>
+            <p>Usage: serverinfo</p>
+        </div>
+        <div class="command-box" data-module="information">
+       </div>
+        <div class="command-box" data-module="information">
+            <h3>usage</h3>
+            <p>Shows the usage of a command</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: usage &lt;command&gt;</p>
+        </div>
+        <div class="command-box" data-module="lastfm">
+            <h3>lastfm</h3>
+            <p>Interact with your music</p>
+            <p>Aliases: lf</p>
+            <hr>
+            <p>Usage: lastfm [set|reset] &lt;username&gt;</p>
+        </div>
+        <div class="command-box" data-module="lastfm">
+            <h3>Lastfm nowplaying</h3>
+            <p>Shows your currently playing song</p>
+            <p>Aliases:np</p>
+            <hr>
+            <p>Usage:lastfm nowplaying</p>
+        </div>
+        <div class="command-box" data-module="lastfm">
+            <h3>recent</h3>
+            <p>Shows your most recent tracks</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: recent</p>
+        </div><div class="command-box" data-module="lastfm">
+            <h3>lastfm whoknows</h3>
+            <p>Interact with your music</p>
+            <p>Aliases: lf wk</p>
+            <hr>
+            <p>Usage: lastfm wk &lt;username&gt;</p>
+        </div>
+        <div class="command-box" data-module="moderation">
+            <h3>ban</h3>
+            <p>Ban a member</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: ban &lt;member&gt;</p>
+        </div>
+        <div class="command-box" data-module="moderation">
+            <h3>kick</h3>
+            <p>Kick a member</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: kick &lt;member&gt;</p>
+        </div>
+        <div class="command-box" data-module="moderation">
+            <h3>mute</h3>
+            <p>Mute a member</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: mute &lt;member&gt;</p>
+        </div>
+        <div class="command-box" data-module="moderation">
+            <h3>unban</h3>
+            <p>Unban a member</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: unban &lt;member&gt;</p>
+        </div>
+        <div class="command-box" data-module="moderation">
+            <h3>unmute</h3>
+            <p>Unmute a member</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: unmute &lt;member&gt;</p>
+        </div>
+    <div class="command-box" data-module="moderation">
+            <h3>strip</h3>
+            <p>strip a staff</p>
+            <p>Aliases: none</p>
+            <hr>
+            <p>Usage: strip &lt;member&gt;</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const tabs = document.querySelectorAll('.tab');
+    const commandBoxes = document.querySelectorAll('.command-box');
+
+    function showModule(module) {
+        tabs.forEach(tab => tab.classList.remove('active'));
+        document.querySelector(`.tab[onclick="showModule('${module}')"]`).classList.add('active');
+
+        commandBoxes.forEach(box => {
+            if (module === 'all' || box.getAttribute('data-module') === module) {
+                box.style.display = 'block';
+                setTimeout(() => box.classList.add('show'), 50);
+            } else {
+                box.classList.remove('show');
+                setTimeout(() => box.style.display = 'none', 1000);
+            }
+        });
+    }
+
+    function searchCommands() {
+        const filter = document.getElementById('searchInput').value.toUpperCase();
+        commandBoxes.forEach(box => {
+            const command = box.querySelector('h3').textContent.toUpperCase();
+            const description = box.querySelector('p').textContent.toUpperCase();
+            if (command.includes(filter) || description.includes(filter)) {
+                box.style.display = 'block';
+                setTimeout(() => box.classList.add('show'), 50);
+            } else {
+                box.classList.remove('show');
+                setTimeout(() => box.style.display = 'none', 1000);
+            }
+        });
+    }
+
+    // Show all commands by default
+    document.addEventListener('DOMContentLoaded', () => showModule('all'));
+</script>
+</body>
+</html>
